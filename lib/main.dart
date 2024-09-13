@@ -13,7 +13,10 @@ class NewsApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+      theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
+          appBarTheme:
+              const AppBarTheme(backgroundColor: Colors.white, elevation: 0.0)),
       initialRoute: SplashScreen.routename,
       routes: {
         SplashScreen.routename: (context) => const SplashScreen(),

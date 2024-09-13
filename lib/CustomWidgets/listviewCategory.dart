@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news/Models/categorymodel.dart';
-import 'package:news/Widgets/categorywidget.dart';
+import 'package:news/CustomWidgets/categorywidget.dart';
 
 class ListViewCategories extends StatelessWidget {
   const ListViewCategories({super.key});
@@ -26,10 +26,15 @@ List<CategoryModel> categorylist = [
   CategoryModel(
       categoryname: 'Science', imageurl: 'assests/images/science.avif'),
   CategoryModel(
-      categoryname: 'General', imageurl: 'assests/images/general.avif'),
+      categoryname: 'business', imageurl: 'assests/images/business.avif'),
   CategoryModel(categoryname: 'Sports', imageurl: 'assests/images/sports.avif'),
-  CategoryModel(categoryname: 'Health', imageurl: 'assests/images/health.avif'),
   CategoryModel(
-      categoryname: 'Entertaiment',
+      categoryname: 'politics', imageurl: 'assests/images/politics.jpeg'),
+  CategoryModel(
+      categoryname: 'entertainment',
       imageurl: 'assests/images/entertaiment.avif'),
+  CategoryModel(
+      categoryname: 'technology', imageurl: 'assests/images/techonlogy.jpeg'),
+  CategoryModel(
+      categoryname: 'education', imageurl: 'assests/images/education.jpeg'),
 ];

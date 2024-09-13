@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:news/Widgets/appbartitle.dart';
-import 'package:news/Widgets/listviewCategory.dart';
-import 'package:news/Widgets/listviewatricles.dart';
+import 'package:news/CustomWidgets/Listviewbuilder.dart';
+import 'package:news/CustomWidgets/appbartitle.dart';
+import 'package:news/CustomWidgets/listviewCategory.dart';
 
 class NewsView extends StatelessWidget {
   const NewsView({super.key});
@@ -12,7 +12,12 @@ class NewsView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const AppBarTitle(),
+        leading: const Icon(Icons.next_week_sharp),
         actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.search),
+          ),
           IconButton(
             onPressed: () {},
             icon: const Icon(
@@ -24,17 +29,17 @@ class NewsView extends StatelessWidget {
       ),
       body: const Padding(
         padding: EdgeInsets.only(right: 5.0, left: 5.0),
-        child: CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: ListViewCategories(),
+        child: Column(
+          children: [
+            ListViewCategories(),
+            SizedBox(
+              height: 10,
             ),
-            SliverToBoxAdapter(
-              child: SizedBox(
-                height: 10,
+            Expanded(
+              child: ListviewBuilder(
+                category: 'world',
               ),
             ),
-            ListViewArticles(),
           ],
         ),
       ),

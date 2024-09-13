@@ -12,7 +12,7 @@ class AppBarTitle extends StatelessWidget {
           'News',
           style: TextStyle(
             color: Colors.black,
-            fontSize: 22,
+            fontSize: 25,
             fontWeight: FontWeight.w400,
           ),
         ),
@@ -20,7 +20,7 @@ class AppBarTitle extends StatelessWidget {
           'Cloud',
           style: TextStyle(
             color: Colors.amber,
-            fontSize: 22,
+            fontSize: 25,
             fontWeight: FontWeight.w400,
           ),
         ),

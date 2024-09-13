@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen>
     animationController = AnimationController(
       vsync: this,
       duration: const Duration(
-        seconds: 7,
+        seconds: 3,
       ),
     );
     fadingAnimation =

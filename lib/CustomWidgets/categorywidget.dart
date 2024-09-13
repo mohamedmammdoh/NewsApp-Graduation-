@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:news/Models/categorymodel.dart';
+import 'package:news/Views/categoryview.dart';
 
 class CategoryWidget extends StatelessWidget {
   const CategoryWidget({super.key, required this.category});
@@ -9,7 +10,13 @@ class CategoryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) {
+            return CategoryView(category: category.categoryname);
+          },
+        ));
+      },
       child: Container(
         margin: const EdgeInsets.only(right: 5),
         width: 180,
