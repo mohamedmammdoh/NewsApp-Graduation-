@@ -1,7 +1,7 @@
 class ArticleModel {
-  String imageurl;
-  String title;
-  String subtitle;
+  final dynamic imageurl;
+  final String title;
+  final String subtitle;
   ArticleModel(
       {required this.imageurl, required this.subtitle, required this.title});
 }

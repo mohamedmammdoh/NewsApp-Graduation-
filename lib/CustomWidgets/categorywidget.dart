@@ -16,6 +16,7 @@ class CategoryWidget extends StatelessWidget {
             return CategoryView(category: category.categoryname);
           },
         ));
+        print(category.categoryname);
       },
       child: Container(
         margin: const EdgeInsets.only(right: 5),

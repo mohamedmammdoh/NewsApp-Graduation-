@@ -12,17 +12,12 @@ class NewsView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const AppBarTitle(),
-        leading: const Icon(Icons.next_week_sharp),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.search),
-          ),
           IconButton(
             onPressed: () {},
             icon: const Icon(
               Icons.logout,
-              color: Colors.black,
+              // color: Colors.black,
             ),
           ),
         ],

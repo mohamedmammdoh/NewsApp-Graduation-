@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:news/Views/homeview.dart';
+import 'package:news/Views/loginview.dart';
+import 'package:news/Views/registerview.dart';
 import 'package:news/Views/splashview.dart';
+import 'package:news/services/NewsService.dart';
 
 void main() {
+  print(NewsServices().GetNews(category: 'education'));
   runApp(const NewsApp());
 }
 
@@ -13,14 +17,16 @@ class NewsApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
-          appBarTheme:
-              const AppBarTheme(backgroundColor: Colors.white, elevation: 0.0)),
+      theme: ThemeData.dark().copyWith(
+        // scaffoldBackgroundColor: Colors.white,
+        appBarTheme: const AppBarTheme(elevation: 0.0),
+      ),
       initialRoute: SplashScreen.routename,
       routes: {
         SplashScreen.routename: (context) => const SplashScreen(),
         NewsView.routename: (context) => const NewsView(),
+        LoginView.routename: (context) => const LoginView(),
+        RegisterView.routename: (context) => const RegisterView(),
       },
     );
   }

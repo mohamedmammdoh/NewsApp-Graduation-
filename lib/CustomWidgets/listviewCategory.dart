@@ -24,7 +24,7 @@ class ListViewCategories extends StatelessWidget {
 
 List<CategoryModel> categorylist = [
   CategoryModel(
-      categoryname: 'Science', imageurl: 'assests/images/science.avif'),
+      categoryname: 'science', imageurl: 'assests/images/science.avif'),
   CategoryModel(
       categoryname: 'business', imageurl: 'assests/images/business.avif'),
   CategoryModel(categoryname: 'Sports', imageurl: 'assests/images/sports.avif'),

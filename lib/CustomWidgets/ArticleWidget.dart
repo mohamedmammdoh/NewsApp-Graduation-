@@ -13,7 +13,7 @@ class ArticleWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CachedNetworkImage(
-              imageUrl: articleModel.imageurl,
+              imageUrl: articleModel.imageurl.toString(),
               imageBuilder: (context, imageProvider) => Container(
                     width: double.infinity,
                     height: 230,

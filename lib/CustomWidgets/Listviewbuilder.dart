@@ -17,7 +17,6 @@ class _ListviewBuilderState extends State<ListviewBuilder> {
   @override
   void initState() {
     future = NewsServices().GetNews(category: widget.category);
-
     super.initState();
   }
 
@@ -54,10 +53,12 @@ class ErorrMassage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Text(
-      'OOPS There was an error ,trylater',
-      style: TextStyle(
-        fontSize: 25,
+    return Center(
+      child: Text(
+        'OOPS There was an error ,trylater',
+        style: TextStyle(
+          fontSize: 25,
+        ),
       ),
     );
   }
