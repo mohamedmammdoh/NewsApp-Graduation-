@@ -3,9 +3,16 @@ import 'package:news/CustomWidgets/Listviewbuilder.dart';
 import 'package:news/CustomWidgets/appbartitle.dart';
 import 'package:news/CustomWidgets/listviewCategory.dart';
 
-class NewsView extends StatelessWidget {
+class NewsView extends StatefulWidget {
   const NewsView({super.key});
   static const routename = 'homeview';
+
+  @override
+  State<NewsView> createState() => _NewsViewState();
+}
+
+class _NewsViewState extends State<NewsView> {
+  bool isdark = true;
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +20,15 @@ class NewsView extends StatelessWidget {
       appBar: AppBar(
         title: const AppBarTitle(),
         actions: [
+          IconButton(
+              onPressed: () {
+                setState(() {});
+              },
+              icon: isdark
+                  ? Icon(Icons.dark_mode)
+                  : Icon(
+                      Icons.light_mode,
+                    )),
           IconButton(
             onPressed: () {},
             icon: const Icon(

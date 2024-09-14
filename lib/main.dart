@@ -3,10 +3,8 @@ import 'package:news/Views/homeview.dart';
 import 'package:news/Views/loginview.dart';
 import 'package:news/Views/registerview.dart';
 import 'package:news/Views/splashview.dart';
-import 'package:news/services/NewsService.dart';
 
 void main() {
-  print(NewsServices().GetNews(category: 'education'));
   runApp(const NewsApp());
 }
 
