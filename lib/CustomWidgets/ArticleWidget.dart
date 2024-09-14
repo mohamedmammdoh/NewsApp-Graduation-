@@ -12,27 +12,6 @@ class ArticleWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Container(
-          //   width: double.infinity,
-          //   height: 230,
-          //   decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(8),
-          //     image: DecorationImage(
-          //       fit: BoxFit.cover,
-          //       image: NetworkImage(
-          //         articleModel.imageurl ??
-          //             'https://thumbs.dreamstime.com/b/news-woodn-dice-depicting-letters-bundle-small-newspapers-leaning-left-dice-34802664.jpg',
-          //       ),
-          //     ),
-          //   ),
-          // ),
-          // CachedNetworkImage(
-          //   imageUrl: articleModel.imageurl,
-          //   imageBuilder: (context, imageProvider) => Container(
-          //       decoration: BoxDecoration(
-          //     borderRadius: BorderRadius.circular(8),
-          //   )),
-          // ),
           CachedNetworkImage(
               imageUrl: articleModel.imageurl,
               imageBuilder: (context, imageProvider) => Container(
@@ -53,7 +32,6 @@ class ArticleWidget extends StatelessWidget {
                     width: double.infinity,
                     fit: BoxFit.cover,
                   )),
-
           Text(
             articleModel.title ?? '',
             maxLines: 2,
@@ -65,7 +43,7 @@ class ArticleWidget extends StatelessWidget {
           ),
           Text(
             articleModel.subtitle ?? '',
-            maxLines: 2,
+            maxLines: 3,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
               color: Colors.grey,
