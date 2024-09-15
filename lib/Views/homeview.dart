@@ -12,23 +12,12 @@ class NewsView extends StatefulWidget {
 }
 
 class _NewsViewState extends State<NewsView> {
-  bool isdark = true;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const AppBarTitle(),
         actions: [
-          IconButton(
-              onPressed: () {
-                setState(() {});
-              },
-              icon: isdark
-                  ? Icon(Icons.dark_mode)
-                  : Icon(
-                      Icons.light_mode,
-                    )),
           IconButton(
             onPressed: () {},
             icon: const Icon(

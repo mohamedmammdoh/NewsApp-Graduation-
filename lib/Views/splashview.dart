@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:news/Views/homeview.dart';
+import 'package:news/Views/loginview.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -75,7 +76,7 @@ class _SplashScreenState extends State<SplashScreen>
     Future.delayed(
       const Duration(seconds: 4),
       () {
-        Navigator.pushReplacementNamed(context, NewsView.routename);
+        Navigator.pushReplacementNamed(context, LoginScreen.routename);
       },
     );
   }
