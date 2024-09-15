@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:news/Views/homeview.dart';
 import 'package:news/Views/loginview.dart';
@@ -17,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen>
     animationController = AnimationController(
       vsync: this,
       duration: const Duration(
-        microseconds: 30000,
+        seconds: 3,
       ),
     );
     fadingAnimation =
@@ -76,7 +77,11 @@ class _SplashScreenState extends State<SplashScreen>
     Future.delayed(
       const Duration(seconds: 4),
       () {
-        Navigator.pushReplacementNamed(context, LoginScreen.routename);
+        Navigator.pushReplacementNamed(
+            context,
+            FirebaseAuth.instance.currentUser != null
+                ? NewsView.routename
+                : LoginView.routename);
       },
     );
   }

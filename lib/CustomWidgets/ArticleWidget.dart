@@ -33,7 +33,7 @@ class ArticleWidget extends StatelessWidget {
                     fit: BoxFit.cover,
                   )),
           Text(
-            articleModel.title ?? '',
+            articleModel.title,
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(
@@ -42,7 +42,7 @@ class ArticleWidget extends StatelessWidget {
             ),
           ),
           Text(
-            articleModel.subtitle ?? '',
+            articleModel.subtitle,
             maxLines: 3,
             overflow: TextOverflow.ellipsis,
             style: const TextStyle(

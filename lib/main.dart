@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:news/Views/homeview.dart';
 import 'package:news/Views/loginview.dart';
@@ -12,8 +13,26 @@ void main() async {
   runApp(const NewsApp());
 }
 
-class NewsApp extends StatelessWidget {
+class NewsApp extends StatefulWidget {
   const NewsApp({super.key});
+
+  @override
+  State<NewsApp> createState() => _NewsAppState();
+}
+
+class _NewsAppState extends State<NewsApp> {
+  //check for user!!
+  void initState() {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
+      if (user == null) {
+        print('User is currently signed out!');
+      } else {
+        print('User is signed in!');
+      }
+    });
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +42,14 @@ class NewsApp extends StatelessWidget {
         // scaffoldBackgroundColor: Colors.white,
         appBarTheme: const AppBarTheme(elevation: 0.0),
       ),
+      // home: SplashScreen(),
       initialRoute: SplashScreen.routename,
       routes: {
         SplashScreen.routename: (context) => const SplashScreen(),
         NewsView.routename: (context) => const NewsView(),
-        LoginScreen.routename: (context) => const LoginScreen(),
-        RegisterScreen.routename: (context) => const RegisterScreen(),
+        LoginView.routename: (context) => const LoginView(),
+        RegisterView.routename: (context) => const RegisterView(),
+        // RegisterScreen.routename: (context) => const RegisterScreen(),
       },
     );
   }

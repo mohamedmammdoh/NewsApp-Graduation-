@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:news/CustomWidgets/custombutton.dart';
+import 'package:news/CustomWidgets/customtextformfield.dart';
+import 'package:news/Views/homeview.dart';
+
 import 'package:news/Views/registerview.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
   static String routename = 'loginview';
+
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LoginView> createState() => _LoginViewState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  bool obscureText = true;
-
+class _LoginViewState extends State<LoginView> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-  @override
+  bool isObsurePassword = true;
+  GlobalKey<FormState> formkey = GlobalKey();
+
   void dispose() {
     super.dispose();
     emailController.dispose();
@@ -25,227 +28,114 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(56.0), // Adjust the height as needed
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF636FA4), Color(0xFF3fada8)],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
+      body: ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Form(
+              key: formkey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: 130),
+                  Text(
+                    'Login',
+                    style: TextStyle(
+                      fontSize: 50,
+                      fontFamily: 'Poppins',
+                    ),
+                  ),
+                  SizedBox(height: 100),
+                  CustomTextFormField(
+                    isobsure: false,
+                    keyboardType: TextInputType.emailAddress,
+                    hinttext: 'please enter your email..',
+                    labeltext: 'EmailAddress',
+                    prefixIcon: Icon(Icons.email),
+                    validation: (value) {
+                      if (value!.isEmpty) {
+                        return 'Change your email';
+                      }
+                      return null;
+                    },
+                    controller: emailController,
+                  ),
+                  SizedBox(height: 20),
+                  CustomTextFormField(
+                    isobsure: isObsurePassword,
+                    hinttext: 'please enter your password..',
+                    labeltext: 'Password',
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          setState(
+                            () {
+                              isObsurePassword = !isObsurePassword;
+                            },
+                          );
+                        },
+                        icon: Icon(
+                          isObsurePassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                        )),
+                    prefixIcon: Icon(Icons.lock),
+                    validation: (value) {
+                      if (value!.isEmpty) {
+                        return 'Change your password';
+                      }
+                      return null;
+                    },
+                    controller: passwordController,
+                    keyboardType: TextInputType.visiblePassword,
+                  ),
+                  TextButton(
+                    onPressed: () {},
+                    child: Container(
+                      alignment: Alignment.topRight,
+                      child: Text(
+                        'Forgetten Passsowrd?',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Poppins',
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  CustomButton(
+                    buttonName: 'LOGIN',
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(
+                        context,
+                        NewsView.routename,
+                      );
+                    },
+                  ),
+                  SizedBox(height: 10),
+                  Center(
+                    child: Text(
+                      'Don\'t have Account ?',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Poppins',
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10),
+                  CustomButton(
+                    buttonName: 'REGISTER',
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(
+                          context, RegisterView.routename);
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
-          child: AppBar(
-            backgroundColor: Colors.transparent,
-            elevation: 0, // Remove the shadow
-          ),
-        ),
-      ),
-      backgroundColor: Color(0xff55598d),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              const SizedBox(height: 300),
-              TextFormField(
-                controller: emailController,
-                decoration: const InputDecoration(
-                  labelText: 'Email',
-                  labelStyle: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: 20),
-                  border: OutlineInputBorder(),
-                  prefixIcon: Icon(
-                    Icons.email,
-                    color: Colors.white,
-                  ),
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Email required";
-                  }
-                  if (!value.contains("@") || !value.contains(".")) {
-                    return "Invalid email!";
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                controller: passwordController,
-                obscureText: obscureText,
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  labelStyle: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                      fontSize: 20),
-                  border: const OutlineInputBorder(),
-                  prefixIcon: const Icon(
-                    Icons.lock,
-                    color: Colors.white,
-                  ),
-                  suffixIcon: IconButton(
-                    onPressed: () {
-                      obscureText = !obscureText;
-                      setState(() {});
-                    },
-                    icon: Icon(
-                      obscureText ? Icons.visibility_off : Icons.visibility,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Password required";
-                  }
-                  if (value.length < 6) {
-                    return "Password must be at least 6 characters";
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          elevation: MaterialStateProperty.all<double>(0),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(40.0),
-                              // Adjust the border radius as needed
-                            ),
-                          ),
-                          minimumSize: MaterialStateProperty.all<Size>(
-                            const Size(200, 50),
-                          ),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Colors.transparent),
-                        ),
-                        onPressed: () async {
-                          String email = emailController.text;
-                          String password = passwordController.text;
-                          bool loggedIn = await signIn(email, password);
-
-                          if (loggedIn) {
-                            Fluttertoast.showToast(msg: 'Login Successful');
-                            //Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Upload()));
-                          } else {
-                            // Handle unsuccessful login
-                            Fluttertoast.showToast(
-                                msg: 'Invalid email or password');
-                          }
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [Color(0xFF636FA4), Color(0xFF3fada8)],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                              ),
-                              borderRadius: BorderRadius.circular(30)),
-                          child: Container(
-                            constraints:
-                                BoxConstraints(maxWidth: 330, minHeight: 50),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Login",
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Expanded(
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          elevation: MaterialStateProperty.all<double>(0),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(40.0),
-                              // Adjust the border radius as needed
-                            ),
-                          ),
-                          minimumSize: MaterialStateProperty.all<Size>(
-                            const Size(200, 50),
-                          ),
-                          backgroundColor: MaterialStateProperty.all<Color>(
-                              Colors.transparent),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      const RegisterScreen()));
-                          // Add your action here
-                        },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [Color(0xFF636FA4), Color(0xFF3fada8)],
-                                begin: Alignment.centerLeft,
-                                end: Alignment.centerRight,
-                              ),
-                              borderRadius: BorderRadius.circular(30)),
-                          child: Container(
-                            constraints:
-                                BoxConstraints(maxWidth: 330, minHeight: 50),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Register",
-                              style:
-                                  TextStyle(fontSize: 20, color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-        ),
+        ],
       ),
     );
-  }
-
-  navToRegisterScreen() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => const RegisterScreen()),
-    );
-  }
-
-  Future<bool> signIn(String emailAddress, String password) async {
-    try {
-      await FirebaseAuth.instance
-          .signInWithEmailAndPassword(email: emailAddress, password: password);
-      return true; // Successful login
-    } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found' || e.code == 'wrong-password') {
-        return false; // Unsuccessful login
-      }
-      // Handle other exceptions if needed
-      return false;
-    }
   }
 }
