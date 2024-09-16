@@ -49,7 +49,6 @@ class _NewsAppState extends State<NewsApp> {
         NewsView.routename: (context) => const NewsView(),
         LoginView.routename: (context) => const LoginView(),
         RegisterView.routename: (context) => const RegisterView(),
-        // RegisterScreen.routename: (context) => const RegisterScreen(),
       },
     );
   }

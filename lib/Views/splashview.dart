@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:news/Views/homeview.dart';
 import 'package:news/Views/loginview.dart';
@@ -79,7 +80,8 @@ class _SplashScreenState extends State<SplashScreen>
       () {
         Navigator.pushReplacementNamed(
             context,
-            FirebaseAuth.instance.currentUser != null
+            (FirebaseAuth.instance.currentUser != null &&
+                    FirebaseAuth.instance.currentUser!.emailVerified)
                 ? NewsView.routename
                 : LoginView.routename);
       },

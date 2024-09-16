@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:news/CustomWidgets/custombutton.dart';
 import 'package:news/CustomWidgets/customtextformfield.dart';
 import 'package:news/Views/homeview.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:news/Views/registerview.dart';
 
 class LoginView extends StatefulWidget {
@@ -89,7 +89,23 @@ class _LoginViewState extends State<LoginView> {
                     keyboardType: TextInputType.visiblePassword,
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      try {
+                        await FirebaseAuth.instance.sendPasswordResetEmail(
+                            email: emailController.text);
+                        // Navigator.pop(context); // Close the dialog
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text('Password reset email sent!'),
+                        ));
+                      } on FirebaseAuthException catch (e) {
+                        if (e.code == 'user-not-found') {
+                          print('No user found for that email.');
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text('No user found for that email.'),
+                          ));
+                        }
+                      }
+                    },
                     child: Container(
                       alignment: Alignment.topRight,
                       child: Text(
@@ -105,11 +121,34 @@ class _LoginViewState extends State<LoginView> {
                   SizedBox(height: 10),
                   CustomButton(
                     buttonName: 'LOGIN',
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(
-                        context,
-                        NewsView.routename,
-                      );
+                    onPressed: () async {
+                      String email = emailController.text;
+                      String password = passwordController.text;
+                      bool loggedIn = await signIn(email, password);
+
+                      if (formkey.currentState!.validate()) {
+                        if (loggedIn) {
+                          print('Successfully');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Successfully'),
+                            ),
+                          );
+
+                          Navigator.pushReplacementNamed(
+                              context, NewsView.routename);
+                        } else {
+                          // Handle unsuccessful login
+                          print('Invalid');
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content:
+                                  Text('Opps error with email or password'),
+                            ),
+                          );
+                        }
+                      }
                     },
                   ),
                   SizedBox(height: 10),
@@ -137,5 +176,19 @@ class _LoginViewState extends State<LoginView> {
         ],
       ),
     );
+  }
+}
+
+Future<bool> signIn(String emailAddress, String password) async {
+  try {
+    await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: emailAddress, password: password);
+    return true; // Successful login
+  } on FirebaseAuthException catch (e) {
+    if (e.code == 'user-not-found' || e.code == 'wrong-password') {
+      return false; // Unsuccessful login
+    }
+    // Handle other exceptions if needed
+    return false;
   }
 }

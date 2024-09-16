@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:news/CustomWidgets/Listviewbuilder.dart';
 import 'package:news/CustomWidgets/appbartitle.dart';
 import 'package:news/CustomWidgets/listviewCategory.dart';
+import 'package:news/Views/loginview.dart';
 
 class NewsView extends StatefulWidget {
   const NewsView({super.key});
@@ -19,7 +21,16 @@ class _NewsViewState extends State<NewsView> {
         title: const AppBarTitle(),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              await FirebaseAuth.instance.signOut();
+              Navigator.pushReplacementNamed(context, LoginView.routename);
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('LogOut Successfully'),
+                ),
+              );
+            },
             icon: const Icon(
               Icons.logout,
               // color: Colors.black,
