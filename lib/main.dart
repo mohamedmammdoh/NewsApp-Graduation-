@@ -1,11 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/Views/homeview.dart';
 import 'package:news/Views/loginview.dart';
 import 'package:news/Views/registerview.dart';
-
 import 'package:news/Views/splashview.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:news/cubit/logincubit/login_cubit.dart';
+import 'package:news/cubit/registercubit/register_cubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,20 +38,28 @@ class _NewsAppState extends State<NewsApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
-        // scaffoldBackgroundColor: Colors.white,
-        appBarTheme: const AppBarTheme(elevation: 0.0),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => LoginCubit()),
+        BlocProvider(
+          create: (context) => RegisterCubit(),
+        )
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.dark().copyWith(
+          // scaffoldBackgroundColor: Colors.white,
+          appBarTheme: const AppBarTheme(elevation: 0.0),
+        ),
+        // home: SplashScreen(),
+        initialRoute: SplashScreen.routename,
+        routes: {
+          SplashScreen.routename: (context) => const SplashScreen(),
+          NewsView.routename: (context) => const NewsView(),
+          LoginView.routename: (context) => LoginView(),
+          RegisterView.routename: (context) => RegisterView(),
+        },
       ),
-      // home: SplashScreen(),
-      initialRoute: SplashScreen.routename,
-      routes: {
-        SplashScreen.routename: (context) => const SplashScreen(),
-        NewsView.routename: (context) => const NewsView(),
-        LoginView.routename: (context) => const LoginView(),
-        RegisterView.routename: (context) => const RegisterView(),
-      },
     );
   }
 }

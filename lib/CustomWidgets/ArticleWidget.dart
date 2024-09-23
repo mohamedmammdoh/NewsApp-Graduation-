@@ -13,25 +13,27 @@ class ArticleWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CachedNetworkImage(
-              imageUrl: articleModel.imageurl.toString(),
-              imageBuilder: (context, imageProvider) => Container(
-                    width: double.infinity,
-                    height: 230,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      image: DecorationImage(
-                        fit: BoxFit.cover,
-                        image: imageProvider,
-                      ),
-                    ),
-                  ),
-              placeholder: (context, url) =>
-                  const Center(child: CircularProgressIndicator()),
-              errorWidget: (context, url, error) => const Image(
-                    image: AssetImage('assests/images/images.jpeg'),
-                    width: double.infinity,
-                    fit: BoxFit.cover,
-                  )),
+            imageUrl: articleModel.imageurl.toString(),
+            imageBuilder: (context, imageProvider) => Container(
+              width: double.infinity,
+              height: 230,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: imageProvider,
+                ),
+              ),
+            ),
+            placeholder: (context, url) => const Center(
+              child: CircularProgressIndicator(),
+            ),
+            errorWidget: (context, url, error) => const Image(
+              image: AssetImage('assests/images/general.avif'),
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
+          ),
           Text(
             articleModel.title,
             maxLines: 2,
