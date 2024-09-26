@@ -6,8 +6,7 @@ import 'package:news/Views/loginview.dart';
 import 'package:news/Views/registerview.dart';
 import 'package:news/Views/splashview.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:news/cubit/logincubit/login_cubit.dart';
-import 'package:news/cubit/registercubit/register_cubit.dart';
+import 'package:news/cubit/Auth/AuthCubit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,17 +37,11 @@ class _NewsAppState extends State<NewsApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => LoginCubit()),
-        BlocProvider(
-          create: (context) => RegisterCubit(),
-        )
-      ],
+    return BlocProvider(
+      create: (context) => AuthCubit(),
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData.dark().copyWith(
-          // scaffoldBackgroundColor: Colors.white,
           appBarTheme: const AppBarTheme(elevation: 0.0),
         ),
         // home: SplashScreen(),

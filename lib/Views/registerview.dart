@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/CustomWidgets/custombutton.dart';
 import 'package:news/CustomWidgets/customtextformfield.dart';
 import 'package:news/Views/loginview.dart';
-import 'package:news/cubit/registercubit/register_cubit.dart';
+import 'package:news/cubit/Auth/AuthCubit.dart';
 
 class RegisterView extends StatelessWidget {
   static String routename = 'registerview';
 
   @override
   Widget build(BuildContext context) {
-    final registerCubit = BlocProvider.of<RegisterCubit>(context);
+    final registerCubit = BlocProvider.of<AuthCubit>(context);
 
     return Scaffold(
       body: ListView(
@@ -18,7 +18,7 @@ class RegisterView extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Form(
-              key: registerCubit.formkey,
+              key: registerCubit.formkeyRegister,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -56,8 +56,9 @@ class RegisterView extends StatelessWidget {
                       if (value!.isEmpty) {
                         return 'change your email address';
                       }
+                      return null;
                     },
-                    controller: registerCubit.emailController,
+                    controller: registerCubit.emailControllerRegister,
                     isobsure: false,
                     keyboardType: TextInputType.emailAddress,
                   ),
@@ -65,14 +66,14 @@ class RegisterView extends StatelessWidget {
                   CustomTextFormField(
                     suffixIcon: null,
                     keyboardType: TextInputType.visiblePassword,
-                    controller: registerCubit.passwordController,
+                    controller: registerCubit.passwordControllerRegister,
                     validation: (value) {
                       if (value!.isEmpty) {
                         return 'Change your password';
                       }
                       return null;
                     },
-                    isobsure: registerCubit.isObsurePassword,
+                    isobsure: registerCubit.isObsurePasswordRegister,
                     hinttext: 'please enter your password..',
                     labeltext: 'Password',
                     prefixIcon: Icon(Icons.lock),
@@ -81,10 +82,12 @@ class RegisterView extends StatelessWidget {
                   CustomButton(
                     buttonName: 'REGISTER',
                     onPressed: () async {
-                      if (registerCubit.formkey.currentState!.validate()) {
+                      if (registerCubit.formkeyRegister.currentState!
+                          .validate()) {
                         registerCubit.Register(
-                          email: registerCubit.emailController.text,
-                          password: registerCubit.passwordController.text,
+                          email: registerCubit.emailControllerRegister.text,
+                          password:
+                              registerCubit.passwordControllerRegister.text,
                           context: context,
                         );
                       }

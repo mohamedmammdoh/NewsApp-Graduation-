@@ -3,23 +3,22 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/CustomWidgets/custombutton.dart';
 import 'package:news/CustomWidgets/customtextformfield.dart';
 import 'package:news/Views/homeview.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:news/Views/registerview.dart';
-import 'package:news/cubit/logincubit/login_cubit.dart';
+import 'package:news/cubit/Auth/AuthCubit.dart';
 
 class LoginView extends StatelessWidget {
   static String routename = 'loginview';
 
   @override
   Widget build(BuildContext context) {
-    final loginCubit = BlocProvider.of<LoginCubit>(context);
+    final authCubit = BlocProvider.of<AuthCubit>(context);
     return Scaffold(
       body: ListView(
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Form(
-              key: loginCubit.formkey,
+              key: authCubit.formkey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -45,20 +44,20 @@ class LoginView extends StatelessWidget {
                       }
                       return null;
                     },
-                    controller: loginCubit.emailController,
+                    controller: authCubit.emailController,
                   ),
                   SizedBox(height: 20),
                   CustomTextFormField(
-                    isobsure: loginCubit.isObsurePassword,
+                    isobsure: authCubit.isObsurePassword,
                     hinttext: 'please enter your password..',
                     labeltext: 'Password',
                     suffixIcon: IconButton(
                         onPressed: () {
-                          loginCubit.isObsurePassword =
-                              !loginCubit.isObsurePassword;
+                          authCubit.isObsurePassword =
+                              !authCubit.isObsurePassword;
                         },
                         icon: Icon(
-                          loginCubit.isObsurePassword
+                          authCubit.isObsurePassword
                               ? Icons.visibility
                               : Icons.visibility_off,
                         )),
@@ -69,26 +68,14 @@ class LoginView extends StatelessWidget {
                       }
                       return null;
                     },
-                    controller: loginCubit.passwordController,
+                    controller: authCubit.passwordController,
                     keyboardType: TextInputType.visiblePassword,
                   ),
                   TextButton(
                     onPressed: () async {
-                      try {
-                        await FirebaseAuth.instance.sendPasswordResetEmail(
-                            email: loginCubit.emailController.text);
-                        // Navigator.pop(context); // Close the dialog
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                          content: Text('Password reset email sent!'),
-                        ));
-                      } on FirebaseAuthException catch (e) {
-                        if (e.code == 'user-not-found') {
-                          print('No user found for that email.');
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text('No user found for that email.'),
-                          ));
-                        }
-                      }
+                      await authCubit.ForgettenPassword(
+                          context: context,
+                          emailcontroller: authCubit.emailController);
                     },
                     child: Container(
                       alignment: Alignment.topRight,
@@ -106,11 +93,11 @@ class LoginView extends StatelessWidget {
                   CustomButton(
                     buttonName: 'LOGIN',
                     onPressed: () async {
-                      String email = loginCubit.emailController.text;
-                      String password = loginCubit.passwordController.text;
-                      bool loggedIn = await loginCubit.signIn(email, password);
+                      String email = authCubit.emailController.text;
+                      String password = authCubit.passwordController.text;
+                      bool loggedIn = await authCubit.signIn(email, password);
 
-                      if (loginCubit.formkey.currentState!.validate()) {
+                      if (authCubit.formkey.currentState!.validate()) {
                         if (loggedIn) {
                           print('Successfully');
                           ScaffoldMessenger.of(context).showSnackBar(
@@ -162,17 +149,3 @@ class LoginView extends StatelessWidget {
     );
   }
 }
-
-// Future<bool> signIn(String emailAddress, String password) async {
-//   try {
-//     await FirebaseAuth.instance
-//         .signInWithEmailAndPassword(email: emailAddress, password: password);
-//     return true; // Successful login
-//   } on FirebaseAuthException catch (e) {
-//     if (e.code == 'user-not-found' || e.code == 'wrong-password') {
-//       return false; // Unsuccessful login
-//     }
-//     // Handle other exceptions if needed
-//     return false;
-//   }
-// }

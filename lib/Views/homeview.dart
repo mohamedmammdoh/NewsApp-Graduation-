@@ -1,10 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/CustomWidgets/Listviewbuilder.dart';
 import 'package:news/CustomWidgets/appbartitle.dart';
 import 'package:news/CustomWidgets/listviewCategory.dart';
 import 'package:news/Views/loginview.dart';
+import 'package:news/cubit/Auth/AuthCubit.dart';
 
 class NewsView extends StatefulWidget {
   const NewsView({super.key});
@@ -17,20 +18,14 @@ class NewsView extends StatefulWidget {
 class _NewsViewState extends State<NewsView> {
   @override
   Widget build(BuildContext context) {
+    final authCubit = BlocProvider.of<AuthCubit>(context);
     return Scaffold(
       appBar: AppBar(
         title: const AppBarTitle(),
         actions: [
           IconButton(
             onPressed: () async {
-              await FirebaseAuth.instance.signOut();
-              Navigator.pushReplacementNamed(context, LoginView.routename);
-
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text('LogOut Successfully'),
-                ),
-              );
+              await authCubit.LogOut(context: context);
             },
             icon: const Icon(
               Icons.logout,
