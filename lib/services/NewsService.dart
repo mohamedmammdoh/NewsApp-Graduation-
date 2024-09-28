@@ -26,4 +26,26 @@ class NewsServices {
       return [];
     }
   }
+  Future<List<ArticleModel>> searchNews({required String query}) async {
+    try {
+      Response response = await dio.get(
+          'https://newsdata.io/api/1/news?apikey=$apiKey&q=$query&country=eg');
+
+      Map<String, dynamic> jsonData = response.data;
+      List<dynamic> results = jsonData['results'];
+      List<ArticleModel> articlesList = [];
+      for (var article in results) {
+        ArticleModel articleModel = ArticleModel(
+          imageurl: article['image_url'],
+          subtitle: article['description'],
+          title: article['title'],
+        );
+        articlesList.add(articleModel);
+      }
+      return articlesList;
+    } on Exception catch (e) {
+      print('Error searching news: $e');
+      return [];
+    }
+  }
 }

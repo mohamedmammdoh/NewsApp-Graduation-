@@ -8,6 +8,8 @@ import 'package:news/Views/splashview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:news/cubit/Auth/AuthCubit.dart';
 
+import 'Views/SearchView.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -50,9 +52,13 @@ class _NewsAppState extends State<NewsApp> {
           SplashScreen.routename: (context) => const SplashScreen(),
           NewsView.routename: (context) => const NewsView(),
           LoginView.routename: (context) => LoginView(),
+          SearchView.routename: (context) => const SearchView(),
           RegisterView.routename: (context) => RegisterView(),
+          SearchView.routename: (context) => const SearchView(),
+
         },
-      ),
+    )
     );
+
   }
 }

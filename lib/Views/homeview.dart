@@ -5,8 +5,11 @@ import 'package:news/CustomWidgets/appbartitle.dart';
 import 'package:news/CustomWidgets/listviewCategory.dart';
 import 'package:news/cubit/Auth/AuthCubit.dart';
 
+import 'SearchView.dart';
+
 class NewsView extends StatefulWidget {
   const NewsView({super.key});
+
   static const routename = 'homeview';
 
   @override
@@ -21,6 +24,12 @@ class _NewsViewState extends State<NewsView> {
       appBar: AppBar(
         title: const AppBarTitle(),
         actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              Navigator.pushNamed(context, SearchView.routename);
+            },
+          ),
           IconButton(
             onPressed: () async {
               await authCubit.LogOut(context: context);
