@@ -10,22 +10,7 @@ class AppBarTitle extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text(
-            'News',
-            style: TextStyle(
-              // color: Colors.black,
-              fontSize: 25,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          Text(
-            'Cloud',
-            style: TextStyle(
-              color: Colors.amber,
-              fontSize: 25,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
+          Text(''),
         ],
       ),
     );

@@ -1,10 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/CustomWidgets/Listviewbuilder.dart';
 import 'package:news/CustomWidgets/appbartitle.dart';
 import 'package:news/CustomWidgets/listviewCategory.dart';
-import 'package:news/Views/loginview.dart';
 import 'package:news/cubit/Auth/AuthCubit.dart';
 
 class NewsView extends StatefulWidget {

@@ -53,8 +53,7 @@ class LoginView extends StatelessWidget {
                     labeltext: 'Password',
                     suffixIcon: IconButton(
                         onPressed: () {
-                          authCubit.isObsurePassword =
-                              !authCubit.isObsurePassword;
+                          authCubit.ObsureTextLogin();
                         },
                         icon: Icon(
                           authCubit.isObsurePassword
