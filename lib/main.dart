@@ -7,6 +7,9 @@ import 'package:news/Views/registerview.dart';
 import 'package:news/Views/splashview.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'Views/SearchView.dart';
+import 'learn/messenger_screen.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -43,12 +46,14 @@ class _NewsAppState extends State<NewsApp> {
         appBarTheme: const AppBarTheme(elevation: 0.0),
       ),
       // home: SplashScreen(),
-      initialRoute: SplashScreen.routename,
+      initialRoute: MassengerView.routename,
       routes: {
         SplashScreen.routename: (context) => const SplashScreen(),
         NewsView.routename: (context) => const NewsView(),
         LoginView.routename: (context) => const LoginView(),
         RegisterView.routename: (context) => const RegisterView(),
+        SearchView.routename: (context) => const SearchView(),
+
         // RegisterScreen.routename: (context) => const RegisterScreen(),
       },
     );
