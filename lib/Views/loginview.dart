@@ -1,39 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/CustomWidgets/custombutton.dart';
 import 'package:news/CustomWidgets/customtextformfield.dart';
 import 'package:news/Views/homeview.dart';
-
 import 'package:news/Views/registerview.dart';
+import 'package:news/cubit/Auth/AuthCubit.dart';
 
-class LoginView extends StatefulWidget {
-  const LoginView({super.key});
+class LoginView extends StatelessWidget {
   static String routename = 'loginview';
 
   @override
-  State<LoginView> createState() => _LoginViewState();
-}
-
-class _LoginViewState extends State<LoginView> {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  bool isObsurePassword = true;
-  GlobalKey<FormState> formkey = GlobalKey();
-
-  void dispose() {
-    super.dispose();
-    emailController.dispose();
-    passwordController.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final authCubit = BlocProvider.of<AuthCubit>(context);
     return Scaffold(
       body: ListView(
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Form(
-              key: formkey,
+              key: authCubit.formkey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -47,6 +32,7 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   SizedBox(height: 100),
                   CustomTextFormField(
+                    suffixIcon: null,
                     isobsure: false,
                     keyboardType: TextInputType.emailAddress,
                     hinttext: 'please enter your email..',
@@ -58,23 +44,20 @@ class _LoginViewState extends State<LoginView> {
                       }
                       return null;
                     },
-                    controller: emailController,
+                    controller: authCubit.emailController,
                   ),
                   SizedBox(height: 20),
                   CustomTextFormField(
-                    isobsure: isObsurePassword,
+                    isobsure: authCubit.isObsurePassword,
                     hinttext: 'please enter your password..',
                     labeltext: 'Password',
                     suffixIcon: IconButton(
                         onPressed: () {
-                          setState(
-                            () {
-                              isObsurePassword = !isObsurePassword;
-                            },
-                          );
+                          authCubit.isObsurePassword =
+                              !authCubit.isObsurePassword;
                         },
                         icon: Icon(
-                          isObsurePassword
+                          authCubit.isObsurePassword
                               ? Icons.visibility
                               : Icons.visibility_off,
                         )),
@@ -85,11 +68,15 @@ class _LoginViewState extends State<LoginView> {
                       }
                       return null;
                     },
-                    controller: passwordController,
+                    controller: authCubit.passwordController,
                     keyboardType: TextInputType.visiblePassword,
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      await authCubit.ForgettenPassword(
+                          context: context,
+                          emailcontroller: authCubit.emailController);
+                    },
                     child: Container(
                       alignment: Alignment.topRight,
                       child: Text(
@@ -105,11 +92,34 @@ class _LoginViewState extends State<LoginView> {
                   SizedBox(height: 10),
                   CustomButton(
                     buttonName: 'LOGIN',
-                    onPressed: () {
-                      Navigator.pushReplacementNamed(
-                        context,
-                        NewsView.routename,
-                      );
+                    onPressed: () async {
+                      String email = authCubit.emailController.text;
+                      String password = authCubit.passwordController.text;
+                      bool loggedIn = await authCubit.signIn(email, password);
+
+                      if (authCubit.formkey.currentState!.validate()) {
+                        if (loggedIn) {
+                          print('Successfully');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Successfully'),
+                            ),
+                          );
+
+                          Navigator.pushReplacementNamed(
+                              context, NewsView.routename);
+                        } else {
+                          // Handle unsuccessful login
+                          print('Invalid');
+
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content:
+                                  Text('Opps error with email or password'),
+                            ),
+                          );
+                        }
+                      }
                     },
                   ),
                   SizedBox(height: 10),

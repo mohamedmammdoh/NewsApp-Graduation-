@@ -79,7 +79,8 @@ class _SplashScreenState extends State<SplashScreen>
       () {
         Navigator.pushReplacementNamed(
             context,
-            FirebaseAuth.instance.currentUser != null
+            (FirebaseAuth.instance.currentUser != null &&
+                    FirebaseAuth.instance.currentUser!.emailVerified)
                 ? NewsView.routename
                 : LoginView.routename);
       },
