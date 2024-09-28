@@ -6,9 +6,14 @@ import 'package:news/Views/homeview.dart';
 import 'package:news/Views/registerview.dart';
 import 'package:news/cubit/Auth/AuthCubit.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatefulWidget {
   static String routename = 'loginview';
 
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     final authCubit = BlocProvider.of<AuthCubit>(context);
@@ -54,6 +59,7 @@ class LoginView extends StatelessWidget {
                     suffixIcon: IconButton(
                         onPressed: () {
                           authCubit.ObsureTextLogin();
+                          setState(() {});
                         },
                         icon: Icon(
                           authCubit.isObsurePassword
@@ -83,7 +89,6 @@ class LoginView extends StatelessWidget {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Poppins',
-                          color: Colors.white,
                         ),
                       ),
                     ),

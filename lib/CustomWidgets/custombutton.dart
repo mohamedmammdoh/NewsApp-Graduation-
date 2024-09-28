@@ -10,8 +10,8 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      child: CupertinoButton(
-        color: Colors.white,
+      child: ElevatedButton(
+        // color: Colors.white,
         child: Text(
           buttonName,
           style: TextStyle(

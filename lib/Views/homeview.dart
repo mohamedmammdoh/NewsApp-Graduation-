@@ -1,10 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/CustomWidgets/Listviewbuilder.dart';
-import 'package:news/CustomWidgets/appbartitle.dart';
 import 'package:news/CustomWidgets/listviewCategory.dart';
+import 'package:news/ThemeApp.dart';
 import 'package:news/cubit/Auth/AuthCubit.dart';
-
 import 'SearchView.dart';
 
 class NewsView extends StatefulWidget {
@@ -22,8 +22,15 @@ class _NewsViewState extends State<NewsView> {
     final authCubit = BlocProvider.of<AuthCubit>(context);
     return Scaffold(
       appBar: AppBar(
-        title: const AppBarTitle(),
+        title: Text('Universal Update'),
+        centerTitle: true,
         actions: [
+          IconButton(
+            onPressed: () {
+              ThemeService().changeTheme();
+            },
+            icon: const Icon(CupertinoIcons.moon),
+          ),
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () {

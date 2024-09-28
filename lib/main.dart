@@ -1,8 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/route_manager.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:news/ThemeApp.dart';
 import 'package:news/Views/homeview.dart';
 import 'package:news/Views/loginview.dart';
+import 'package:news/Views/onboardingview.dart';
 import 'package:news/Views/registerview.dart';
 import 'package:news/Views/splashview.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -11,6 +16,7 @@ import 'package:news/cubit/Auth/AuthCubit.dart';
 import 'Views/SearchView.dart';
 
 void main() async {
+  await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const NewsApp());
@@ -40,25 +46,21 @@ class _NewsAppState extends State<NewsApp> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AuthCubit(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData.dark().copyWith(
-          appBarTheme: const AppBarTheme(elevation: 0.0),
-        ),
-        // home: SplashScreen(),
-        initialRoute: SplashScreen.routename,
-        routes: {
-          SplashScreen.routename: (context) => const SplashScreen(),
-          NewsView.routename: (context) => const NewsView(),
-          LoginView.routename: (context) => LoginView(),
-          SearchView.routename: (context) => const SearchView(),
-          RegisterView.routename: (context) => RegisterView(),
-          SearchView.routename: (context) => const SearchView(),
-
-        },
-    )
-    );
-
+        create: (context) => AuthCubit(),
+        child: GetMaterialApp(
+          theme: ThemeService().lightTheme,
+          darkTheme: ThemeService().darkTheme,
+          themeMode: ThemeService().getThemeMode(),
+          debugShowCheckedModeBanner: false,
+          initialRoute: SplashScreen.routename,
+          routes: {
+            SplashScreen.routename: (context) => const SplashScreen(),
+            OnBoardingView.routename: (context) => OnBoardingView(),
+            NewsView.routename: (context) => const NewsView(),
+            LoginView.routename: (context) => LoginView(),
+            SearchView.routename: (context) => const SearchView(),
+            RegisterView.routename: (context) => RegisterView(),
+          },
+        ));
   }
 }

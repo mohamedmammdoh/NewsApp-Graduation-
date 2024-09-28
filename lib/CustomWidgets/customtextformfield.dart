@@ -33,31 +33,15 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       controller: widget.controller,
       obscureText: widget.isobsure,
       validator: widget.validation,
-      cursorColor: Colors.white,
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(13),
         ),
         labelText: widget.labeltext,
-        labelStyle: TextStyle(color: Colors.white),
         hintText: widget.hinttext,
-        hintStyle: TextStyle(color: Colors.white),
         prefixIcon: widget.prefixIcon,
         suffixIcon: widget.suffixIcon,
-        // suffixIcon: IconButton(
-        //   onPressed: () {
-        //     setState(
-        //       () {
-        //         isObsure = !isObsure;
-        //       },
-        //     );
-        //   },
-        //   icon: Icon(
-        //     isObsure ? Icons.visibility : Icons.visibility_off,
-        //   ),
-        // ),
         focusedBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
           borderRadius: BorderRadius.circular(13),
         ),
       ),

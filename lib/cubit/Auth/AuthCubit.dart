@@ -10,6 +10,7 @@ class AuthCubit extends Cubit<AuthState> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool isObsurePassword = true;
+
   GlobalKey<FormState> formkey = GlobalKey();
 
   final emailControllerRegister = TextEditingController();
@@ -119,5 +120,9 @@ class AuthCubit extends Cubit<AuthState> {
 
   void ObsureTextLogin() {
     isObsurePassword = !isObsurePassword;
+  }
+
+  void ObsureTextRegister() {
+    isObsurePasswordRegister = !isObsurePasswordRegister;
   }
 }

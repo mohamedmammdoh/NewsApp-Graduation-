@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:news/Views/homeview.dart';
 import 'package:news/Views/loginview.dart';
+import 'package:news/Views/onboardingview.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -82,7 +83,7 @@ class _SplashScreenState extends State<SplashScreen>
             (FirebaseAuth.instance.currentUser != null &&
                     FirebaseAuth.instance.currentUser!.emailVerified)
                 ? NewsView.routename
-                : LoginView.routename);
+                : OnBoardingView.routename);
       },
     );
   }
