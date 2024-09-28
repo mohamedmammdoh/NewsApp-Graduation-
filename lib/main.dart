@@ -54,25 +54,11 @@ class _NewsAppState extends State<NewsApp> {
           LoginView.routename: (context) => LoginView(),
           SearchView.routename: (context) => const SearchView(),
           RegisterView.routename: (context) => RegisterView(),
-        },
-      ),
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData.dark().copyWith(
-        // scaffoldBackgroundColor: Colors.white,
-        appBarTheme: const AppBarTheme(elevation: 0.0),
-      ),
-      // home: SplashScreen(),
-      initialRoute: MassengerView.routename,
-      routes: {
-        SplashScreen.routename: (context) => const SplashScreen(),
-        NewsView.routename: (context) => const NewsView(),
-        LoginView.routename: (context) => const LoginView(),
-        RegisterView.routename: (context) => const RegisterView(),
-        SearchView.routename: (context) => const SearchView(),
+          SearchView.routename: (context) => const SearchView(),
 
-        // RegisterScreen.routename: (context) => const RegisterScreen(),
-      },
+        },
+    )
     );
+
   }
 }
