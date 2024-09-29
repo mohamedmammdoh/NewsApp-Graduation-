@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:news/ThemeApp.dart';
@@ -12,6 +11,7 @@ import 'package:news/Views/registerview.dart';
 import 'package:news/Views/splashview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:news/cubit/Auth/AuthCubit.dart';
+import 'package:news/Views/newstitleview.dart';
 
 import 'Views/SearchView.dart';
 
@@ -56,10 +56,10 @@ class _NewsAppState extends State<NewsApp> {
           routes: {
             SplashScreen.routename: (context) => const SplashScreen(),
             OnBoardingView.routename: (context) => OnBoardingView(),
-            NewsView.routename: (context) => const NewsView(),
             LoginView.routename: (context) => LoginView(),
-            SearchView.routename: (context) => const SearchView(),
             RegisterView.routename: (context) => RegisterView(),
+            NewsView.routename: (context) => const NewsView(),
+            SearchView.routename: (context) => const SearchView(),
           },
         ));
   }

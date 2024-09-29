@@ -6,7 +6,8 @@ class ThemeService {
   final _getStorage = GetStorage();
   final lightTheme = ThemeData.light().copyWith(
     appBarTheme: AppBarTheme(
-      titleTextStyle: TextStyle(color: Colors.black, fontSize: 20),
+      titleTextStyle: TextStyle(
+          color: Colors.black, fontSize: 22, fontWeight: FontWeight.w400),
       iconTheme: IconThemeData(color: Colors.black),
     ),
     inputDecorationTheme: InputDecorationTheme(
@@ -20,7 +21,8 @@ class ThemeService {
 
   final darkTheme = ThemeData.dark().copyWith(
     appBarTheme: const AppBarTheme(
-      titleTextStyle: TextStyle(color: Colors.white, fontSize: 20),
+      titleTextStyle: TextStyle(
+          color: Colors.white, fontSize: 22, fontWeight: FontWeight.w400),
       iconTheme: IconThemeData(color: Colors.white),
     ),
     inputDecorationTheme: InputDecorationTheme(

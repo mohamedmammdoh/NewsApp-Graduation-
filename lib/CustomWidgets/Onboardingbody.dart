@@ -22,6 +22,7 @@ class OnBoardingBody extends StatelessWidget {
             fontWeight: FontWeight.bold,
             fontSize: 25,
           ),
+          textAlign: TextAlign.center,
         ),
         const SizedBox(height: 5),
         Text(
