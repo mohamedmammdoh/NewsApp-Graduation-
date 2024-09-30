@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:news/%20constants.dart';
+import 'package:news/core/%20constants.dart';
 import 'package:news/CustomWidgets/custompageviewbuilder.dart';
 import 'package:news/CustomWidgets/customsmoothindecator.dart';
 import 'package:news/Views/loginview.dart';

@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_launcher_icons/xml_templates.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 
 class ThemeService {
   final _getStorage = GetStorage();
   final lightTheme = ThemeData.light().copyWith(
+    scaffoldBackgroundColor: Colors.white,
     appBarTheme: AppBarTheme(
+      backgroundColor: Colors.white,
+      elevation: 0.0,
       titleTextStyle: TextStyle(
-          color: Colors.black, fontSize: 22, fontWeight: FontWeight.w400),
+        color: Colors.black,
+        fontSize: 22,
+        fontWeight: FontWeight.w400,
+      ),
       iconTheme: IconThemeData(color: Colors.black),
     ),
     inputDecorationTheme: InputDecorationTheme(
@@ -17,10 +24,17 @@ class ThemeService {
       hintStyle: TextStyle(color: Colors.black),
       labelStyle: TextStyle(color: Colors.black),
     ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.white,
+      elevation: 0.0,
+      selectedIconTheme: IconThemeData(size: 30),
+      selectedItemColor: Colors.black,
+    ),
   );
 
   final darkTheme = ThemeData.dark().copyWith(
     appBarTheme: const AppBarTheme(
+      elevation: 0.0,
       titleTextStyle: TextStyle(
           color: Colors.white, fontSize: 22, fontWeight: FontWeight.w400),
       iconTheme: IconThemeData(color: Colors.white),
@@ -36,6 +50,12 @@ class ThemeService {
       style: ButtonStyle(
         backgroundColor: MaterialStatePropertyAll(Colors.white),
       ),
+    ),
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: Colors.black,
+      elevation: 0.0,
+      selectedIconTheme: IconThemeData(size: 24),
+      selectedItemColor: Colors.white,
     ),
   );
 

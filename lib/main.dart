@@ -3,22 +3,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:news/ThemeApp.dart';
 import 'package:news/Views/homeview.dart';
+import 'package:news/Views/newsview.dart';
+import 'package:news/Views/profileview.dart';
+import 'package:news/Views/settinghsview.dart';
+import 'package:news/core/ThemeApp.dart';
 import 'package:news/Views/loginview.dart';
 import 'package:news/Views/onboardingview.dart';
 import 'package:news/Views/registerview.dart';
 import 'package:news/Views/splashview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:news/cubit/Auth/AuthCubit.dart';
-import 'package:news/Views/newstitleview.dart';
-
 import 'Views/SearchView.dart';
 
 void main() async {
   await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   runApp(const NewsApp());
 }
 
@@ -46,21 +48,25 @@ class _NewsAppState extends State<NewsApp> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => AuthCubit(),
-        child: GetMaterialApp(
-          theme: ThemeService().lightTheme,
-          darkTheme: ThemeService().darkTheme,
-          themeMode: ThemeService().getThemeMode(),
-          debugShowCheckedModeBanner: false,
-          initialRoute: SplashScreen.routename,
-          routes: {
-            SplashScreen.routename: (context) => const SplashScreen(),
-            OnBoardingView.routename: (context) => OnBoardingView(),
-            LoginView.routename: (context) => LoginView(),
-            RegisterView.routename: (context) => RegisterView(),
-            NewsView.routename: (context) => const NewsView(),
-            SearchView.routename: (context) => const SearchView(),
-          },
-        ));
+      create: (context) => AuthCubit(),
+      child: GetMaterialApp(
+        theme: ThemeService().lightTheme,
+        darkTheme: ThemeService().darkTheme,
+        themeMode: ThemeService().getThemeMode(),
+        debugShowCheckedModeBanner: false,
+        initialRoute: SplashScreen.routename,
+        routes: {
+          SplashScreen.routename: (context) => const SplashScreen(),
+          OnBoardingView.routename: (context) => OnBoardingView(),
+          LoginView.routename: (context) => LoginView(),
+          RegisterView.routename: (context) => RegisterView(),
+          NewsView.routename: (context) => const NewsView(),
+          SearchView.routename: (context) => const SearchView(),
+          ProfileView.routename: (context) => ProfileView(),
+          SettengthView.routename: (context) => SettengthView(),
+          HomeView.routename: (context) => HomeView(),
+        },
+      ),
+    );
   }
 }

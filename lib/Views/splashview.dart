@@ -82,7 +82,7 @@ class _SplashScreenState extends State<SplashScreen>
             context,
             (FirebaseAuth.instance.currentUser != null &&
                     FirebaseAuth.instance.currentUser!.emailVerified)
-                ? NewsView.routename
+                ? HomeView.routename
                 : OnBoardingView.routename);
       },
     );

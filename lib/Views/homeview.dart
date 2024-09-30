@@ -1,69 +1,65 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news/CustomWidgets/Listviewbuilder.dart';
-import 'package:news/CustomWidgets/listviewCategory.dart';
-import 'package:news/ThemeApp.dart';
-import 'package:news/cubit/Auth/AuthCubit.dart';
+import 'package:news/Views/newsview.dart';
+import 'package:news/Views/profileview.dart';
+import 'package:news/Views/settinghsview.dart';
+
 import 'SearchView.dart';
 
-class NewsView extends StatefulWidget {
-  const NewsView({super.key});
+class HomeView extends StatefulWidget {
+  const HomeView({super.key});
 
   static const routename = 'homeview';
 
   @override
-  State<NewsView> createState() => _NewsViewState();
+  State<HomeView> createState() => _HomeViewState();
 }
 
-class _NewsViewState extends State<NewsView> {
+class _HomeViewState extends State<HomeView> {
+  int _currentIndex = 0;
+  List<Widget> screens = [
+    NewsView(),
+    SettengthView(),
+    ProfileView(),
+  ];
+  List<String> appbartitle = [
+    'Universal Update',
+    'Settings View',
+    'Profile View'
+  ];
   @override
   Widget build(BuildContext context) {
-    final authCubit = BlocProvider.of<AuthCubit>(context);
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.newspaper), label: 'News'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings), label: 'Settings'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'profile'),
+        ],
+        currentIndex: _currentIndex,
+        onTap: (value) {
+          setState(() {
+            _currentIndex = value;
+          });
+        },
+      ),
       appBar: AppBar(
-        title: Text('Universal Update'),
+        title: Text(appbartitle[_currentIndex]),
         centerTitle: true,
+        leading: Icon(
+          Icons.waving_hand,
+          color: Colors.amber,
+        ),
         actions: [
-          IconButton(
-            onPressed: () {
-              ThemeService().changeTheme();
-            },
-            icon: const Icon(CupertinoIcons.moon),
-          ),
           IconButton(
             icon: const Icon(Icons.search),
             onPressed: () {
               Navigator.pushNamed(context, SearchView.routename);
             },
           ),
-          IconButton(
-            onPressed: () async {
-              await authCubit.LogOut(context: context);
-            },
-            icon: const Icon(
-              Icons.logout,
-              // color: Colors.black,
-            ),
-          ),
         ],
       ),
-      body: const Padding(
-        padding: EdgeInsets.only(right: 5.0, left: 5.0),
-        child: Column(
-          children: [
-            ListViewCategories(),
-            SizedBox(
-              height: 10,
-            ),
-            Expanded(
-              child: ListviewBuilder(
-                category: 'world',
-              ),
-            ),
-          ],
-        ),
-      ),
+      body: screens[_currentIndex],
     );
   }
 }

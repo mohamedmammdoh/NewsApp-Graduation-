@@ -111,7 +111,8 @@ class _LoginViewState extends State<LoginView> {
                           );
 
                           Navigator.pushReplacementNamed(
-                              context, NewsView.routename);
+                              context, HomeView.routename,
+                              arguments: email);
                         } else {
                           // Handle unsuccessful login
                           print('Invalid');

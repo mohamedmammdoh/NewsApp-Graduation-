@@ -52,7 +52,7 @@ class AuthCubit extends Cubit<AuthState> {
       FirebaseAuth.instance.currentUser!.sendEmailVerification();
       Navigator.pushReplacementNamed(context, LoginView.routename);
       if (credential.user!.emailVerified) {
-        Navigator.pushReplacementNamed(context, NewsView.routename);
+        Navigator.pushReplacementNamed(context, HomeView.routename);
         emit(RegisterSuccessState());
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
