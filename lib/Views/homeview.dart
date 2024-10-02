@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:news/Views/newsview.dart';
-import 'package:news/Views/profileview.dart';
 import 'package:news/Views/settinghsview.dart';
-
+import 'package:news/services/favoritesview.dart';
 import 'SearchView.dart';
 
 class HomeView extends StatefulWidget {
@@ -18,13 +17,13 @@ class _HomeViewState extends State<HomeView> {
   int _currentIndex = 0;
   List<Widget> screens = [
     NewsView(),
+    FavoutitesView(),
     SettengthView(),
-    ProfileView(),
   ];
   List<String> appbartitle = [
     'Universal Update',
+    'Favorites View',
     'Settings View',
-    'Profile View'
   ];
   @override
   Widget build(BuildContext context) {
@@ -33,8 +32,9 @@ class _HomeViewState extends State<HomeView> {
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.newspaper), label: 'News'),
           BottomNavigationBarItem(
+              icon: Icon(Icons.favorite), label: 'Favorites'),
+          BottomNavigationBarItem(
               icon: Icon(Icons.settings), label: 'Settings'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'profile'),
         ],
         currentIndex: _currentIndex,
         onTap: (value) {

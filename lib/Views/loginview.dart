@@ -145,6 +145,30 @@ class _LoginViewState extends State<LoginView> {
                           context, RegisterView.routename);
                     },
                   ),
+                  SizedBox(height: 10),
+                  Container(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            'assests/images/facebook-logo.png',
+                            width: 100,
+                            height: 30,
+                          ),
+                          Text(
+                            'SignIn With Facebook',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Poppins',
+                              fontSize: 17,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

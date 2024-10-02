@@ -5,7 +5,6 @@ import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:news/Views/homeview.dart';
 import 'package:news/Views/newsview.dart';
-import 'package:news/Views/profileview.dart';
 import 'package:news/Views/settinghsview.dart';
 import 'package:news/core/ThemeApp.dart';
 import 'package:news/Views/loginview.dart';
@@ -14,6 +13,7 @@ import 'package:news/Views/registerview.dart';
 import 'package:news/Views/splashview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:news/cubit/Auth/AuthCubit.dart';
+import 'package:news/services/favoritesview.dart';
 import 'Views/SearchView.dart';
 
 void main() async {
@@ -62,9 +62,9 @@ class _NewsAppState extends State<NewsApp> {
           RegisterView.routename: (context) => RegisterView(),
           NewsView.routename: (context) => const NewsView(),
           SearchView.routename: (context) => const SearchView(),
-          ProfileView.routename: (context) => ProfileView(),
           SettengthView.routename: (context) => SettengthView(),
           HomeView.routename: (context) => HomeView(),
+          FavoutitesView.routenmae: (context) => FavoutitesView(),
         },
       ),
     );

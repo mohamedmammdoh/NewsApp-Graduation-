@@ -10,7 +10,6 @@ class CustomButton extends StatelessWidget {
     return Container(
       width: double.infinity,
       child: ElevatedButton(
-        // color: Colors.white,
         child: Text(
           buttonName,
           style: TextStyle(
