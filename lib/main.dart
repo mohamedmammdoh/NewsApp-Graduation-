@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/route_manager.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:news/Views/MainView.dart';
-import 'package:news/Views/homeview.dart';
 import 'package:news/Views/newsview.dart';
 import 'package:news/Views/settinghsview.dart';
 import 'package:news/core/ThemeApp.dart';
@@ -14,7 +13,7 @@ import 'package:news/Views/registerview.dart';
 import 'package:news/Views/splashview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:news/cubit/Auth/AuthCubit.dart';
-import 'package:news/services/favoritesview.dart';
+import 'package:news/Views/favoritesview.dart';
 import 'Views/SearchView.dart';
 
 void main() async {
@@ -51,19 +50,10 @@ class _NewsAppState extends State<NewsApp> {
     return BlocProvider(
       create: (context) => AuthCubit(),
       child: GetMaterialApp(
-        theme: ThemeService().lightTheme,
         darkTheme: ThemeService().darkTheme,
         themeMode: ThemeService().getThemeMode(),
         debugShowCheckedModeBanner: false,
-        theme: ThemeData.dark().copyWith(
-          appBarTheme: const AppBarTheme(elevation: 0.0),
-          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-            backgroundColor: Colors.black, // Background color of the bottom nav
-            selectedItemColor: Colors.yellow, // Color of selected item
-            unselectedItemColor: Colors.grey, // Color of unselected items
-          ),
-        ),
-        // home: MainView(),
+        theme:    ThemeService().lightTheme,
         initialRoute: SplashScreen.routename,
         routes: {
           MainView.routename :(context) => const MainView(),
@@ -73,9 +63,8 @@ class _NewsAppState extends State<NewsApp> {
           RegisterView.routename: (context) => RegisterView(),
           NewsView.routename: (context) => const NewsView(),
           SearchView.routename: (context) => const SearchView(),
-          SettengthView.routename: (context) => SettengthView(),
-          HomeView.routename: (context) => HomeView(),
-          FavoutitesView.routenmae: (context) => FavoutitesView(),
+          SettingsView.routename: (context) => SettingsView(),
+          // FavoutitesView.routenmae: (context) => FavoutitesView(),
 
         },
       ),

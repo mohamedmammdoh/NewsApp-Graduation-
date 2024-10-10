@@ -2,12 +2,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/Views/profileview.dart';
+import 'package:news/Views/settinghsview.dart';
+import 'package:news/Views/favoritesview.dart';
 
-import '../CustomWidgets/appbartitle.dart';
 import '../cubit/Auth/AuthCubit.dart';
 import 'SearchView.dart';
 import 'categoryview.dart';
-import 'homeview.dart';
+import 'newsview.dart';
 
 class MainView extends StatefulWidget {
   const MainView({super.key});
@@ -19,46 +20,54 @@ class MainView extends StatefulWidget {
 }
 
 class _NewsViewState extends State<MainView> {
-  int _selectedIndex = 0;
-
-  final List<Widget> _pages = [
-    const NewsView(), // Replace with your Home Screen widget
-    const SearchView(),
-    const ProfileScreen(), // Create ProfileScreen widget
-    const CategoriesScreen(), // Create CategoriesScreen widget
+  int _currentIndex = 0;
+  List<Widget> screens = [
+    NewsView(),
+    CategoriesScreen(),
+    ProfileScreen(),
+    SettingsView(),
   ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
+  List<String> appbartitle = [
+    'Universal Update',
+    'Categories Screen',
+    'Profile Screen',
+    'Settings Screen',
+  ];
   @override
   Widget build(BuildContext context) {
     final authCubit = BlocProvider.of<AuthCubit>(context);
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const AppBarTitle(),
-      //   actions: [
-      //     IconButton(
-      //       icon: const Icon(Icons.logout),
-      //       onPressed: () async {
-      //         await authCubit.LogOut(context: context);
-      //       },
-      //     ),
-      //   ],
-      // ),
-      body: _pages[_selectedIndex],
+      appBar: AppBar(
+        title: Text(appbartitle[_currentIndex]),
+        centerTitle: true,
+        leading: Icon(
+          Icons.waving_hand,
+          color: Colors.amber,
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              Navigator.pushNamed(context, SearchView.routename);
+            },
+          ),
+        ],
+      ),
+      body: screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: 'Search'),
+          BottomNavigationBarItem(icon: Icon(Icons.newspaper), label: 'News'),
+          BottomNavigationBarItem(icon: Icon(Icons.category), label: 'Category'),
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
-          BottomNavigationBarItem(icon: Icon(Icons.category), label: 'Categories'),
+          BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Settings'),
+          // BottomNavigationBarItem(icon: Icon(Icons.category), label: 'Categories'),
         ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
+        currentIndex: _currentIndex,
+        onTap: (value) {
+          setState(() {
+            _currentIndex = value;
+          });
+        },
       ),
     );
   }

@@ -6,6 +6,7 @@ import 'package:news/Views/MainView.dart';
 import 'package:news/Views/registerview.dart';
 import 'package:news/cubit/Auth/AuthCubit.dart';
 
+
 class LoginView extends StatefulWidget {
   static String routename = 'loginview';
 
@@ -111,21 +112,22 @@ class _LoginViewState extends State<LoginView> {
                           );
 
                           Navigator.pushReplacementNamed(
-                              context, HomeView.routename,
-                              arguments: email);
-                              context, MainView.routename);
-                        } else {
-                          // Handle unsuccessful login
-                          print('Invalid');
-
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content:
-                                  Text('Opps error with email or password'),
-                            ),
+                              context, MainView.routename,
+                              arguments: email
                           );
-                        }
+
+                      } else {
+                      // Handle unsuccessful login
+                      print('Invalid');
+
+                      ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                      content:
+                      Text('Opps error with email or password'),
+                      ),
+                      );
                       }
+                    }
                     },
                   ),
                   SizedBox(height: 10),
