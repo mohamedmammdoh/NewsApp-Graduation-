@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/CustomWidgets/custombutton.dart';
 import 'package:news/CustomWidgets/customtextformfield.dart';
-import 'package:news/Views/homeview.dart';
+import 'package:news/Views/MainView.dart';
 import 'package:news/Views/registerview.dart';
 import 'package:news/cubit/Auth/AuthCubit.dart';
 
@@ -107,7 +107,7 @@ class LoginView extends StatelessWidget {
                           );
 
                           Navigator.pushReplacementNamed(
-                              context, NewsView.routename);
+                              context, MainView.routename);
                         } else {
                           // Handle unsuccessful login
                           print('Invalid');

@@ -8,6 +8,7 @@ import 'package:news/Views/loginview.dart';
 import 'package:news/cubit/Auth/AuthCubit.dart';
 
 import 'SearchView.dart';
+import 'categoryview.dart';
 
 class NewsView extends StatefulWidget {
   const NewsView({super.key});
@@ -19,38 +20,51 @@ class NewsView extends StatefulWidget {
 }
 
 class _NewsViewState extends State<NewsView> {
+  int _selectedIndex = 0;
+
+  final List<Widget> _pages = [
+    const NewsView(), // Replace with your Home Screen widget
+    const SearchView(),
+    PageView(), // Create ProfileScreen widget
+    const CategoriesScreen(), // Create CategoriesScreen widget
+  ];
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
   @override
   Widget build(BuildContext context) {
     final authCubit = BlocProvider.of<AuthCubit>(context);
     return Scaffold(
       appBar: AppBar(
         title: const AppBarTitle(),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              Navigator.pushNamed(context, SearchView.routename);
-            },
-          ),
-          IconButton(
-            onPressed: () async {
-              await authCubit.LogOut(context: context);
-            },
-            icon: const Icon(
-              Icons.logout,
-              // color: Colors.black,
-            ),
-          ),
-        ],
+        // actions: [
+        //   IconButton(
+        //     icon: const Icon(Icons.search),
+        //     onPressed: () {
+        //       Navigator.pushNamed(context, SearchView.routename);
+        //     },
+        //   ),
+        //   IconButton(
+        //     onPressed: () async {
+        //       await authCubit.LogOut(context: context);
+        //     },
+        //     icon: const Icon(
+        //       Icons.logout,
+        //       // color: Colors.black,
+        //     ),
+        //   ),
+        // ],
       ),
       body: const Padding(
         padding: EdgeInsets.only(right: 5.0, left: 5.0),
         child: Column(
           children: [
-            ListViewCategories(),
-            SizedBox(
-              height: 10,
-            ),
+            // ListViewCategories(),
+            // SizedBox(
+            //   height: 10,
+            // ),
             Expanded(
               child: ListviewBuilder(
                 category: 'world',

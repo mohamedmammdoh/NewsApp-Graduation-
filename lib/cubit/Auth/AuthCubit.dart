@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news/Views/homeview.dart';
+import 'package:news/Views/MainView.dart';
 import 'package:news/Views/loginview.dart';
 import 'package:news/cubit/Auth/Authstate.dart';
 
@@ -53,7 +53,7 @@ class AuthCubit extends Cubit<AuthState> {
       FirebaseAuth.instance.currentUser!.sendEmailVerification();
       Navigator.pushReplacementNamed(context, LoginView.routename);
       if (credential.user!.emailVerified) {
-        Navigator.pushReplacementNamed(context, NewsView.routename);
+        Navigator.pushReplacementNamed(context, MainView.routename);
         emit(RegisterSuccessState());
       } else {
         ScaffoldMessenger.of(context).showSnackBar(

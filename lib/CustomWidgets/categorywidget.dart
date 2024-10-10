@@ -3,40 +3,36 @@ import 'package:flutter/material.dart';
 import 'package:news/Models/categorymodel.dart';
 import 'package:news/Views/categoryview.dart';
 
+import 'package:flutter/material.dart';
+import 'package:news/Models/categorymodel.dart';
+
 class CategoryWidget extends StatelessWidget {
-  const CategoryWidget({super.key, required this.category});
   final CategoryModel category;
+
+  const CategoryWidget({Key? key, required this.category}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) {
-            return CategoryView(category: category.categoryname);
-          },
-        ));
-        print(category.categoryname);
-      },
-      child: Container(
-        margin: const EdgeInsets.only(right: 5),
-        width: 180,
-        height: 100,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          image: DecorationImage(
+    return Card(
+      elevation: 4,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          // Display the category image
+          Image.asset(
+            category.imageurl,
             fit: BoxFit.cover,
-            image: AssetImage(category.imageurl),
+            height: 60, // Set a height for the image
           ),
-        ),
-        child: Center(
-          child: Text(
+          const SizedBox(height: 8),
+          // Display the category name
+          Text(
             category.categoryname,
-            style: const TextStyle(
-                color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
           ),
-        ),
+        ],
       ),
     );
   }
 }
+

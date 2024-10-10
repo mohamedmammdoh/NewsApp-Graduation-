@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:news/Views/MainView.dart';
 import 'package:news/Views/homeview.dart';
 import 'package:news/Views/loginview.dart';
 import 'package:news/Views/registerview.dart';
@@ -45,16 +46,21 @@ class _NewsAppState extends State<NewsApp> {
         debugShowCheckedModeBanner: false,
         theme: ThemeData.dark().copyWith(
           appBarTheme: const AppBarTheme(elevation: 0.0),
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            backgroundColor: Colors.black, // Background color of the bottom nav
+            selectedItemColor: Colors.yellow, // Color of selected item
+            unselectedItemColor: Colors.grey, // Color of unselected items
+          ),
         ),
-        // home: SplashScreen(),
+        // home: MainView(),
         initialRoute: SplashScreen.routename,
         routes: {
+          MainView.routename :(context) => const MainView(),
           SplashScreen.routename: (context) => const SplashScreen(),
           NewsView.routename: (context) => const NewsView(),
           LoginView.routename: (context) => LoginView(),
           SearchView.routename: (context) => const SearchView(),
           RegisterView.routename: (context) => RegisterView(),
-          SearchView.routename: (context) => const SearchView(),
 
         },
     )
