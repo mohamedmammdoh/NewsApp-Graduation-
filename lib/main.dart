@@ -1,19 +1,27 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get/route_manager.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:news/Views/MainView.dart';
 import 'package:news/Views/homeview.dart';
+import 'package:news/Views/newsview.dart';
+import 'package:news/Views/settinghsview.dart';
+import 'package:news/core/ThemeApp.dart';
 import 'package:news/Views/loginview.dart';
+import 'package:news/Views/onboardingview.dart';
 import 'package:news/Views/registerview.dart';
 import 'package:news/Views/splashview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:news/cubit/Auth/AuthCubit.dart';
-
+import 'package:news/services/favoritesview.dart';
 import 'Views/SearchView.dart';
 
 void main() async {
+  await GetStorage.init();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
   runApp(const NewsApp());
 }
 
@@ -42,7 +50,10 @@ class _NewsAppState extends State<NewsApp> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AuthCubit(),
-      child: MaterialApp(
+      child: GetMaterialApp(
+        theme: ThemeService().lightTheme,
+        darkTheme: ThemeService().darkTheme,
+        themeMode: ThemeService().getThemeMode(),
         debugShowCheckedModeBanner: false,
         theme: ThemeData.dark().copyWith(
           appBarTheme: const AppBarTheme(elevation: 0.0),
@@ -57,14 +68,17 @@ class _NewsAppState extends State<NewsApp> {
         routes: {
           MainView.routename :(context) => const MainView(),
           SplashScreen.routename: (context) => const SplashScreen(),
-          NewsView.routename: (context) => const NewsView(),
+          OnBoardingView.routename: (context) => OnBoardingView(),
           LoginView.routename: (context) => LoginView(),
-          SearchView.routename: (context) => const SearchView(),
           RegisterView.routename: (context) => RegisterView(),
+          NewsView.routename: (context) => const NewsView(),
+          SearchView.routename: (context) => const SearchView(),
+          SettengthView.routename: (context) => SettengthView(),
+          HomeView.routename: (context) => HomeView(),
+          FavoutitesView.routenmae: (context) => FavoutitesView(),
 
         },
-    )
+      ),
     );
-
   }
 }

@@ -1,17 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:news/CustomWidgets/Listviewbuilder.dart';
-import 'package:news/CustomWidgets/appbartitle.dart';
-import 'package:news/CustomWidgets/listviewCategory.dart';
-import 'package:news/Views/loginview.dart';
-import 'package:news/cubit/Auth/AuthCubit.dart';
-
+import 'package:news/Views/newsview.dart';
+import 'package:news/Views/settinghsview.dart';
+import 'package:news/services/favoritesview.dart';
 import 'SearchView.dart';
 import 'categoryview.dart';
 
-class NewsView extends StatefulWidget {
-  const NewsView({super.key});
+class HomeView extends StatefulWidget {
+  const HomeView({super.key});
 
   static const routename = 'homeview';
 
@@ -35,8 +30,22 @@ class _NewsViewState extends State<NewsView> {
   }
   @override
   Widget build(BuildContext context) {
-    final authCubit = BlocProvider.of<AuthCubit>(context);
     return Scaffold(
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.newspaper), label: 'News'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.favorite), label: 'Favorites'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.settings), label: 'Settings'),
+        ],
+        currentIndex: _currentIndex,
+        onTap: (value) {
+          setState(() {
+            _currentIndex = value;
+          });
+        },
+      ),
       appBar: AppBar(
         title: const AppBarTitle(),
         // actions: [
@@ -72,7 +81,22 @@ class _NewsViewState extends State<NewsView> {
             ),
           ],
         ),
+        title: Text(appbartitle[_currentIndex]),
+        centerTitle: true,
+        leading: Icon(
+          Icons.waving_hand,
+          color: Colors.amber,
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.search),
+            onPressed: () {
+              Navigator.pushNamed(context, SearchView.routename);
+            },
+          ),
+        ],
       ),
+      body: screens[_currentIndex],
     );
   }
 }

@@ -3,7 +3,7 @@ import 'package:news/Models/articlemodel.dart';
 
 class NewsServices {
   final dio = Dio();
-  final String apiKey = 'pub_531734e1d692425f264129c2af49c1c6928f7';
+  final String apiKey = 'pub_50222c909c868ed08b304dd599d745b1b2298';
   final String country = 'eg';
 
   Future<List<ArticleModel>> GetNews({required String category}) async {

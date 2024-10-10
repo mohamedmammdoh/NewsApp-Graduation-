@@ -5,9 +5,14 @@ import 'package:news/CustomWidgets/customtextformfield.dart';
 import 'package:news/Views/loginview.dart';
 import 'package:news/cubit/Auth/AuthCubit.dart';
 
-class RegisterView extends StatelessWidget {
+class RegisterView extends StatefulWidget {
   static String routename = 'registerview';
 
+  @override
+  State<RegisterView> createState() => _RegisterViewState();
+}
+
+class _RegisterViewState extends State<RegisterView> {
   @override
   Widget build(BuildContext context) {
     final registerCubit = BlocProvider.of<AuthCubit>(context);
@@ -64,7 +69,16 @@ class RegisterView extends StatelessWidget {
                   ),
                   SizedBox(height: 10),
                   CustomTextFormField(
-                    suffixIcon: null,
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          registerCubit.ObsureTextRegister();
+                          setState(() {});
+                        },
+                        icon: Icon(
+                          registerCubit.isObsurePassword
+                              ? Icons.visibility
+                              : Icons.visibility_off,
+                        )),
                     keyboardType: TextInputType.visiblePassword,
                     controller: registerCubit.passwordControllerRegister,
                     validation: (value) {

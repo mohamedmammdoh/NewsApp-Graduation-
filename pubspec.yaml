@@ -31,13 +31,15 @@ dependencies:
   cached_network_image: ^3.4.0
   cupertino_icons: ^1.0.6
   dio: ^5.7.0
-
   firebase_auth: ^5.2.0
   firebase_core: ^3.4.0
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.6
   flutter_launcher_icons: ^0.13.1
+  get: ^4.6.6
+  get_storage: ^2.1.1
+  smooth_page_indicator: ^1.2.0+3
 
 
 dev_dependencies:

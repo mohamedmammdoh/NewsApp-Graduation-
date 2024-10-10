@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
@@ -10,8 +9,7 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      child: CupertinoButton(
-        color: Colors.white,
+      child: ElevatedButton(
         child: Text(
           buttonName,
           style: TextStyle(

@@ -1,7 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:news/Views/MainView.dart';
 import 'package:news/Views/loginview.dart';
@@ -12,6 +10,7 @@ class AuthCubit extends Cubit<AuthState> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   bool isObsurePassword = true;
+
   GlobalKey<FormState> formkey = GlobalKey();
 
   final emailControllerRegister = TextEditingController();
@@ -117,5 +116,13 @@ class AuthCubit extends Cubit<AuthState> {
         ));
       }
     }
+  }
+
+  void ObsureTextLogin() {
+    isObsurePassword = !isObsurePassword;
+  }
+
+  void ObsureTextRegister() {
+    isObsurePasswordRegister = !isObsurePasswordRegister;
   }
 }

@@ -6,9 +6,14 @@ import 'package:news/Views/MainView.dart';
 import 'package:news/Views/registerview.dart';
 import 'package:news/cubit/Auth/AuthCubit.dart';
 
-class LoginView extends StatelessWidget {
+class LoginView extends StatefulWidget {
   static String routename = 'loginview';
 
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
   @override
   Widget build(BuildContext context) {
     final authCubit = BlocProvider.of<AuthCubit>(context);
@@ -53,8 +58,8 @@ class LoginView extends StatelessWidget {
                     labeltext: 'Password',
                     suffixIcon: IconButton(
                         onPressed: () {
-                          authCubit.isObsurePassword =
-                              !authCubit.isObsurePassword;
+                          authCubit.ObsureTextLogin();
+                          setState(() {});
                         },
                         icon: Icon(
                           authCubit.isObsurePassword
@@ -84,7 +89,6 @@ class LoginView extends StatelessWidget {
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Poppins',
-                          color: Colors.white,
                         ),
                       ),
                     ),
@@ -107,6 +111,8 @@ class LoginView extends StatelessWidget {
                           );
 
                           Navigator.pushReplacementNamed(
+                              context, HomeView.routename,
+                              arguments: email);
                               context, MainView.routename);
                         } else {
                           // Handle unsuccessful login
@@ -139,6 +145,30 @@ class LoginView extends StatelessWidget {
                       Navigator.pushReplacementNamed(
                           context, RegisterView.routename);
                     },
+                  ),
+                  SizedBox(height: 10),
+                  Container(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: Row(
+                        children: [
+                          Image.asset(
+                            'assests/images/facebook-logo.png',
+                            width: 100,
+                            height: 30,
+                          ),
+                          Text(
+                            'SignIn With Facebook',
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: 'Poppins',
+                              fontSize: 17,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ],
               ),
