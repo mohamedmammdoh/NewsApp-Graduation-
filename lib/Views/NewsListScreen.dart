@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:news/Models/articlemodel.dart';
 import 'package:news/services/NewsService.dart';
+
+import 'newstitleview.dart';
 
 class NewsListScreen extends StatelessWidget {
   final String category;
@@ -56,7 +59,14 @@ class NewsListScreen extends StatelessWidget {
                   )
                       : null,
                   onTap: () {
-                    // Handle article tap (e.g., navigate to article detail)
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return NewTitleView(articleModel: article);
+                        },
+                      ),
+                    );
                   },
                 );
               },

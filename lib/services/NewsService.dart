@@ -35,7 +35,7 @@ class NewsServices {
           'https://newsdata.io/api/1/news?apikey=$apiKey&q=$query&country=eg');
       if (response.statusCode == 429) {
         print('Too many requests. Please try again later.');
-        return []; // Or handle accordingly
+        return [];
       }
       Map<String, dynamic> jsonData = response.data;
       List<dynamic> results = jsonData['results'];
