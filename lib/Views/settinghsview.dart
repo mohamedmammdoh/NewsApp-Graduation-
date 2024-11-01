@@ -4,8 +4,8 @@ import 'package:news/CustomWidgets/custommatrialbutton.dart';
 import 'package:news/core/ThemeApp.dart';
 import 'package:news/cubit/Auth/AuthCubit.dart';
 
-class SettengthView extends StatelessWidget {
-  const SettengthView({super.key});
+class SettingsView extends StatelessWidget {
+  const SettingsView({super.key});
   static String routename = 'settinghsview';
   @override
   Widget build(BuildContext context) {
@@ -30,12 +30,12 @@ class SettengthView extends StatelessWidget {
               },
             ),
             SizedBox(height: 100),
-            CustomMatrialButton(
-              name: 'LogOut',
-              onPressed: () async {
-                await authCubit.LogOut(context: context);
-              },
-            )
+            // CustomMatrialButton(
+            //   name: 'LogOut',
+            //   onPressed: () async {
+            //     await authCubit.LogOut(context: context);
+            //   },
+            // )
           ],
         ),
       ),

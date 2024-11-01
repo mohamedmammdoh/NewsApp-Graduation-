@@ -29,6 +29,7 @@ class ThemeService {
       elevation: 0.0,
       selectedIconTheme: IconThemeData(size: 30),
       selectedItemColor: Colors.black,
+      unselectedItemColor: Colors.grey, // Color of unselected items
     ),
   );
 
@@ -56,6 +57,7 @@ class ThemeService {
       elevation: 0.0,
       selectedIconTheme: IconThemeData(size: 24),
       selectedItemColor: Colors.white,
+      unselectedItemColor: Colors.grey, // Color of unselected items
     ),
   );
 

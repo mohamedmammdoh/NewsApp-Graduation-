@@ -11,7 +11,7 @@ class NewsView extends StatelessWidget {
       padding: EdgeInsets.only(right: 5.0, left: 5.0),
       child: Column(
         children: [
-          ListViewCategories(),
+          // ListViewCategories(),
           SizedBox(
             height: 10,
           ),

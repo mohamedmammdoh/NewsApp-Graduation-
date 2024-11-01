@@ -1,6 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:news/Views/homeview.dart';
+import 'package:news/Views/MainView.dart';
 import 'package:news/Views/loginview.dart';
 import 'package:news/Views/onboardingview.dart';
 
@@ -82,8 +82,9 @@ class _SplashScreenState extends State<SplashScreen>
             context,
             (FirebaseAuth.instance.currentUser != null &&
                     FirebaseAuth.instance.currentUser!.emailVerified)
-                ? HomeView.routename
+                ? MainView.routename
                 : OnBoardingView.routename);
+
       },
     );
   }

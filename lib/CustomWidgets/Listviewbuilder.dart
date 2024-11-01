@@ -12,7 +12,6 @@ class ListviewBuilder extends StatefulWidget {
 }
 
 class _ListviewBuilderState extends State<ListviewBuilder> {
-  // ignore: prefer_typing_uninitialized_variables
   var future;
   @override
   void initState() {
@@ -55,7 +54,7 @@ class ErorrMassage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Text(
-        'OOPS There was an error ,trylater',
+        'OOPS There was an error ,try later',
         style: TextStyle(
           fontSize: 25,
         ),
